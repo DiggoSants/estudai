@@ -3,94 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?= e(APP_NAME) ?> — <?= $tab === 'register' ? 'Criar conta' : 'Entrar' ?></title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title><?= e(APP_NAME) ?> - <?= $tab === 'register' ? 'Criar conta' : 'Entrar' ?></title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#09090f;--card:#111120;--gold:#e8c547;--violet:#6b4de6;--coral:#e85d4a;--mint:#4ab89a;--text:#e8e8f0;--muted:#6b6b8a;--border:#1e1e38;--input:#15152a}
-body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
-body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");pointer-events:none;z-index:999}
-a{text-decoration:none}.page{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
-.left{background:var(--card);border-right:1px solid var(--border);padding:60px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}.left-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 60%,rgba(107,77,230,.2),transparent 70%)}.left-logo{font-family:'Bebas Neue';font-size:36px;letter-spacing:2px;color:var(--gold);position:relative;z-index:2}.left-hero{position:relative;z-index:2}.left-hero h2{font-family:'Bebas Neue';font-size:64px;letter-spacing:2px;line-height:.95;margin-bottom:20px}.left-hero h2 span{color:var(--gold)}.left-hero p{color:var(--muted);font-size:16px;line-height:1.7;max-width:380px}.left-features{display:flex;flex-direction:column;gap:16px;position:relative;z-index:2}.lf-item{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted)}.lf-item span:first-child{font-size:20px}.lf-item strong{color:var(--text)}
-.right{padding:60px;display:flex;align-items:center;justify-content:center}.auth-box{width:100%;max-width:440px}.auth-logo-mobile{font-family:'Bebas Neue';font-size:32px;letter-spacing:2px;color:var(--gold);display:none;margin-bottom:32px}.tabs{display:flex;background:var(--input);border:1px solid var(--border);border-radius:10px;padding:4px;margin-bottom:36px}.tab{flex:1;padding:10px;text-align:center;border-radius:7px;font-size:14px;font-weight:700;cursor:pointer;border:none;background:transparent;color:var(--muted);transition:all .2s;letter-spacing:.3px}.tab.active{background:var(--violet);color:#fff}
-.form-title{font-family:'Bebas Neue';font-size:36px;letter-spacing:1px;margin-bottom:8px}.form-sub{color:var(--muted);font-size:14px;margin-bottom:28px}.field{margin-bottom:18px}.field label{display:block;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-family:'DM Mono'}.field input{width:100%;background:var(--input);border:1.5px solid var(--border);border-radius:8px;padding:14px 16px;color:var(--text);font-size:15px;font-family:'Syne',sans-serif;transition:border-color .2s,box-shadow .2s;outline:none}.field input:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(107,77,230,.15)}.field input::placeholder{color:var(--muted)}
-.btn-submit{width:100%;background:var(--gold);color:#09090f;border:none;border-radius:8px;padding:16px;font-size:16px;font-weight:800;font-family:'Syne',sans-serif;cursor:pointer;transition:all .25s;letter-spacing:.5px;margin-top:8px}.btn-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,197,71,.25)}.alert{padding:14px 16px;border-radius:8px;font-size:14px;margin-bottom:20px;display:flex;align-items:center;gap:10px}.alert.error{background:rgba(232,93,74,.12);border:1px solid rgba(232,93,74,.3);color:#f0a090}.alert.success{background:rgba(74,184,154,.12);border:1px solid rgba(74,184,154,.3);color:#7be0c4}.switch-link{text-align:center;margin-top:24px;font-size:13px;color:var(--muted)}.switch-link a{color:var(--violet);font-weight:700}.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:13px;margin-bottom:32px;transition:color .2s}.back-link:hover{color:var(--text)}
-@media(max-width:768px){.page{grid-template-columns:1fr}.left{display:none}.right{padding:32px 20px}.auth-logo-mobile{display:block}}
+:root{--bg:#060b18;--bg2:#080e1c;--card:#0d1628;--card2:#111e38;--accent:#00e5a0;--accent2:#00b8ff;--danger:#ff6b6b;--text:#eef2ff;--muted:#6b7ba8;--border:rgba(255,255,255,.08);--grad:linear-gradient(135deg,#00e5a0,#00b8ff)}
+*{box-sizing:border-box;margin:0;padding:0}body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.6}h1,h2,h3,.logo-text,.tab,button{font-family:'Syne',sans-serif}a{text-decoration:none;color:inherit}.atmo,.stars{position:fixed;inset:0;pointer-events:none;z-index:0}.atmo:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 900px 600px at 0% 20%,rgba(0,229,160,.07),transparent 65%),radial-gradient(ellipse 800px 560px at 110% 80%,rgba(0,184,255,.07),transparent 65%)}.stars{background-image:radial-gradient(1px 1px at 15% 20%,rgba(255,255,255,.35),transparent),radial-gradient(1px 1px at 72% 8%,rgba(255,255,255,.25),transparent),radial-gradient(1.5px 1.5px at 92% 62%,rgba(0,229,160,.5),transparent)}
+.page{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;min-height:100vh}.left{padding:58px 7vw;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,rgba(0,229,160,.08),rgba(0,184,255,.03) 45%,transparent);border-right:1px solid var(--border)}.logo{display:flex;align-items:center;gap:10px}.logo-icon{width:40px;height:40px;border-radius:11px;background:var(--grad);display:grid;place-items:center;font-weight:800;color:#060b18;box-shadow:0 0 20px rgba(0,229,160,.3)}.logo-text{font-size:22px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.left h1{font-size:clamp(46px,6vw,78px);line-height:1;letter-spacing:-.03em;margin-bottom:24px}.left h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.left p{max-width:440px;color:var(--muted);font-size:18px}.feature-list{display:grid;gap:14px}.feature{display:flex;gap:12px;align-items:flex-start;color:var(--muted)}.feature b{color:var(--text)}.dot{width:10px;height:10px;margin-top:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 18px rgba(0,229,160,.55);flex:0 0 auto}
+.right{display:grid;place-items:center;padding:40px 24px}.box{width:min(460px,100%);background:rgba(13,22,40,.82);border:1px solid var(--border);border-radius:24px;padding:34px;box-shadow:0 40px 100px rgba(0,0,0,.35);backdrop-filter:blur(16px)}.back{display:inline-flex;color:var(--muted);font-size:14px;margin-bottom:28px}.back:hover{color:var(--text)}.tabs{display:flex;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:30px}.tab{flex:1;text-align:center;padding:11px;border-radius:9px;color:var(--muted);font-weight:800;font-size:14px}.tab.active{background:var(--grad);color:#060b18}.form-title{font-size:32px;letter-spacing:-.02em;margin-bottom:8px}.form-sub{color:var(--muted);font-size:15px;margin-bottom:24px}.field{margin-bottom:17px}.field label{display:block;color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}.field input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:15px 16px;color:var(--text);font:500 15px 'DM Sans';outline:none}.field input:focus{border-color:rgba(0,229,160,.55);box-shadow:0 0 0 4px rgba(0,229,160,.08)}.btn{width:100%;border:0;border-radius:12px;background:var(--grad);color:#060b18;padding:16px;font-weight:800;font-size:16px;cursor:pointer;box-shadow:0 0 36px rgba(0,229,160,.25);transition:.22s}.btn:hover{transform:translateY(-2px)}.alert{padding:13px 15px;border-radius:12px;margin-bottom:18px;font-size:14px}.error{background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.25);color:#ffb1b1}.success{background:rgba(0,229,160,.1);border:1px solid rgba(0,229,160,.25);color:var(--accent)}.switch{text-align:center;color:var(--muted);font-size:14px;margin-top:22px}.switch a{color:var(--accent);font-weight:800}
+@media(max-width:820px){.page{grid-template-columns:1fr}.left{display:none}.right{min-height:100vh}.box{padding:26px}}
 </style>
 </head>
 <body>
-<div class="page">
-  <div class="left">
-    <div class="left-bg"></div>
-    <a href="<?= url() ?>" class="left-logo">Estudai</a>
-    <div class="left-hero">
-      <h2>Sua jornada<br>começa <span>aqui.</span></h2>
-      <p>Entre na plataforma que ajuda estudantes a conquistar aprovação com método, simulado e inteligência.</p>
+<div class="atmo"></div><div class="stars"></div>
+<main class="page">
+  <section class="left">
+    <a href="<?= url() ?>" class="logo"><div class="logo-icon">E</div><span class="logo-text">Estudai</span></a>
+    <div>
+      <h1><?= $tab === 'register' ? 'Comece sua jornada no <em>Estudai.</em>' : 'Continue de onde voce <em>parou.</em>' ?></h1>
+      <p>Entre direto no sistema para fazer simulados, acompanhar XP, ver seus pontos fracos e transformar erro em rota de estudo.</p>
     </div>
-    <div class="left-features">
-      <div class="lf-item"><span>🎯</span><div><strong>Estudo direcionado</strong> — só o que você precisa</div></div>
-      <div class="lf-item"><span>🔥</span><div><strong>Streaks e XP</strong> — gamificação real</div></div>
-      <div class="lf-item"><span>🤖</span><div><strong>IA que analisa</strong> — seus pontos fracos</div></div>
-      <div class="lf-item"><span>🆓</span><div><strong>100% gratuito</strong> — comece agora</div></div>
+    <div class="feature-list">
+      <div class="feature"><span class="dot"></span><div><b>Acesso direto:</b> cadastro criado, dashboard liberado.</div></div>
+      <div class="feature"><span class="dot"></span><div><b>Diagnostico real:</b> desempenho por materia e recomendacao diaria.</div></div>
+      <div class="feature"><span class="dot"></span><div><b>Gamificacao:</b> XP, streaks e conquistas para manter ritmo.</div></div>
     </div>
-  </div>
+  </section>
 
-  <div class="right">
-    <div class="auth-box">
-      <a href="<?= url() ?>" class="back-link">← Voltar ao início</a>
-      <a href="<?= url() ?>" class="auth-logo-mobile">Estudai</a>
-
+  <section class="right">
+    <div class="box">
+      <a href="<?= url() ?>" class="back">Voltar ao inicio</a>
       <div class="tabs">
         <a href="<?= url('login?tab=login') ?>" class="tab <?= $tab === 'login' ? 'active' : '' ?>">Entrar</a>
         <a href="<?= url('login?tab=register') ?>" class="tab <?= $tab === 'register' ? 'active' : '' ?>">Criar conta</a>
       </div>
-
-      <?php if ($erro): ?><div class="alert error">⚠ <?= e($erro) ?></div><?php endif; ?>
-      <?php if ($ok): ?><div class="alert success">✓ <?= e($ok) ?></div><?php endif; ?>
+      <?php if ($erro): ?><div class="alert error"><?= e($erro) ?></div><?php endif; ?>
+      <?php if ($ok): ?><div class="alert success"><?= e($ok) ?></div><?php endif; ?>
 
       <?php if ($tab === 'login'): ?>
-        <h2 class="form-title">Bem-vindo de volta!</h2>
-        <p class="form-sub">Entre para continuar de onde parou.</p>
+        <h2 class="form-title">Bem-vindo de volta</h2>
+        <p class="form-sub">Acesse seu dashboard e continue evoluindo.</p>
         <form action="<?= url('login') ?>" method="POST">
           <input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>">
-          <div class="field">
-            <label>E-mail</label>
-            <input type="email" name="email" placeholder="seu@email.com" value="<?= e($_POST['email'] ?? '') ?>" required autofocus>
-          </div>
-          <div class="field">
-            <label>Senha</label>
-            <input type="password" name="senha" placeholder="••••••••" required>
-          </div>
-          <button type="submit" class="btn-submit">Entrar →</button>
+          <div class="field"><label>E-mail</label><input type="email" name="email" placeholder="seu@email.com" value="<?= e($_POST['email'] ?? '') ?>" required autofocus></div>
+          <div class="field"><label>Senha</label><input type="password" name="senha" placeholder="Sua senha" required></div>
+          <button class="btn" type="submit">Entrar</button>
         </form>
-        <div class="switch-link">Não tem conta? <a href="<?= url('login?tab=register') ?>">Criar gratuitamente</a></div>
+        <div class="switch">Nao tem conta? <a href="<?= url('login?tab=register') ?>">Criar gratuitamente</a></div>
       <?php else: ?>
-        <h2 class="form-title">Criar sua conta</h2>
-        <p class="form-sub">Grátis para sempre. Comece em 60 segundos.</p>
+        <h2 class="form-title">Criar conta gratis</h2>
+        <p class="form-sub">Sem confirmacao manual. Voce entra e ja pode estudar.</p>
         <form action="<?= url('register') ?>" method="POST">
           <input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>">
-          <div class="field">
-            <label>Nome completo</label>
-            <input type="text" name="nome" placeholder="João Silva" value="<?= e($_POST['nome'] ?? '') ?>" required autofocus>
-          </div>
-          <div class="field">
-            <label>E-mail</label>
-            <input type="email" name="email" placeholder="seu@email.com" value="<?= e($_POST['email'] ?? '') ?>" required>
-          </div>
-          <div class="field">
-            <label>Senha</label>
-            <input type="password" name="senha" placeholder="Mínimo 6 caracteres" required>
-          </div>
-          <div class="field">
-            <label>Confirmar senha</label>
-            <input type="password" name="confirmar" placeholder="Repita a senha" required>
-          </div>
-          <button type="submit" class="btn-submit">Criar conta grátis ✦</button>
+          <div class="field"><label>Nome completo</label><input type="text" name="nome" placeholder="Joao Silva" value="<?= e($_POST['nome'] ?? '') ?>" required autofocus></div>
+          <div class="field"><label>E-mail</label><input type="email" name="email" placeholder="seu@email.com" value="<?= e($_POST['email'] ?? '') ?>" required></div>
+          <div class="field"><label>Senha</label><input type="password" name="senha" placeholder="Minimo 6 caracteres" required></div>
+          <div class="field"><label>Confirmar senha</label><input type="password" name="confirmar" placeholder="Repita a senha" required></div>
+          <button class="btn" type="submit">Criar conta</button>
         </form>
-        <div class="switch-link">Já tem conta? <a href="<?= url('login') ?>">Fazer login</a></div>
+        <div class="switch">Ja tem conta? <a href="<?= url('login') ?>">Fazer login</a></div>
       <?php endif; ?>
     </div>
-  </div>
-</div>
+  </section>
+</main>
 </body>
 </html>
