@@ -1,0 +1,19 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controllers;
+
+use App\Core\Controller;
+
+final class HomeController extends Controller
+{
+    public function index(): void
+    {
+        if (auth()) {
+            $this->redirect('dashboard');
+        }
+
+        $this->view('home/index', ['title' => 'Inicio'], '');
+    }
+}
