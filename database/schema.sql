@@ -162,16 +162,16 @@ CREATE TABLE IF NOT EXISTS usuario_conquistas (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO conquistas (id, chave, nome, descricao, icone, xp_bonus) VALUES
-    (1, 'primeiro_simulado', 'Primeira Prova', 'Completou seu primeiro simulado', 'ALVO', 50),
-    (2, 'streak_3', 'Trinômio do Esforço', '3 dias consecutivos de estudo', 'FOGO', 80),
-    (3, 'streak_7', 'Semana Perfeita', '7 dias consecutivos de estudo', 'RAIO', 200),
-    (4, 'acerto_perfeito', 'Nota 10!', 'Acertou 100% de um simulado', 'TROF', 150),
-    (5, 'maratona', 'Maratonista', 'Completou 10 simulados', 'MEDA', 300),
-    (6, 'mestre_matematica', 'Mestre dos Números', 'Acertou 90% ou mais em Matemática em 5 simulados', 'MAT', 250),
-    (7, 'mestre_portugues', 'Senhor das Palavras', 'Acertou 90% ou mais em Português em 5 simulados', 'POR', 250),
-    (8, 'velocista', 'Velocista', 'Terminou um simulado em menos de 5 minutos', 'TEMP', 100),
-    (9, 'dedicado', 'Dedicado', 'Acumulou 1000 XP', 'XP', 200),
-    (10, 'explorador', 'Explorador', 'Respondeu questões de 5 matérias diferentes', 'MAPA', 120)
+    (1, 'primeiro_simulado', 'Primeira Prova', 'Completou seu primeiro simulado', '🎯', 50),
+    (2, 'streak_3', 'Trinômio do Esforço', '3 dias consecutivos de estudo', '🔥', 80),
+    (3, 'streak_7', 'Semana Perfeita', '7 dias consecutivos de estudo', '⚡', 200),
+    (4, 'acerto_perfeito', 'Nota 10!', 'Acertou 100% de um simulado', '🏆', 150),
+    (5, 'maratona', 'Maratonista', 'Completou 10 simulados', '🏅', 300),
+    (6, 'mestre_matematica', 'Mestre dos Números', 'Acertou 90% ou mais em Matemática em 5 simulados', '📐', 250),
+    (7, 'mestre_portugues', 'Senhor das Palavras', 'Acertou 90% ou mais em Português em 5 simulados', '📖', 250),
+    (8, 'velocista', 'Velocista', 'Terminou um simulado em menos de 5 minutos', '⏱️', 100),
+    (9, 'dedicado', 'Dedicado', 'Acumulou 1000 XP', '💎', 200),
+    (10, 'explorador', 'Explorador', 'Respondeu questões de 5 matérias diferentes', '🌐', 120)
 ON DUPLICATE KEY UPDATE
     nome = VALUES(nome),
     descricao = VALUES(descricao),

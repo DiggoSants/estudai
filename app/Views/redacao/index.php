@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= e(APP_NAME) ?> - Oficina de Redação</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#060b18;--card:#0d1628;--card2:#111e38;--accent:#00e5a0;--accent2:#00b8ff;--warn:#ffd166;--danger:#ff6b6b;--text:#eef2ff;--muted:#6b7ba8;--border:rgba(255,255,255,.08);--grad:linear-gradient(135deg,#00e5a0,#00b8ff)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.6;padding:28px}
-h1,h2,h3,.logo-text,.btn,.metric strong{font-family:'Syne',sans-serif}
+body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;line-height:1.6;padding:28px}
+h1,h2,h3,.logo-text,.btn,.metric strong{font-family:'Montserrat',sans-serif}
 a{text-decoration:none;color:inherit}
 .atmo{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 900px 600px at -10% 10%,rgba(0,229,160,.06),transparent 65%),radial-gradient(ellipse 800px 560px at 110% 80%,rgba(0,184,255,.06),transparent 65%)}
 .wrap{position:relative;max-width:1280px;margin:0 auto}
@@ -21,17 +21,17 @@ a{text-decoration:none;color:inherit}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border:0;border-radius:12px;background:var(--grad);color:#060b18;padding:13px 20px;font-weight:800;cursor:pointer;box-shadow:0 0 34px rgba(0,229,160,.2);text-align:center}
 .ghost{background:rgba(255,255,255,.04);color:var(--text);border:1px solid var(--border);box-shadow:none}
 .hero{background:linear-gradient(160deg,rgba(0,229,160,.08),rgba(0,184,255,.04));border:1px solid rgba(0,229,160,.18);border-radius:26px;padding:clamp(22px,4vw,34px);margin-bottom:20px;overflow:hidden}
-h1{font-size:clamp(42px,7vw,74px);line-height:1;letter-spacing:-.03em;margin-bottom:12px}
+h1{font-size:clamp(42px,7vw,74px);line-height:1.08;letter-spacing:0;margin-bottom:12px}
 .hero p,.muted{color:var(--muted);overflow-wrap:anywhere}
 .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:22px}
 .metric{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:16px;padding:16px}
 .metric strong{display:block;font-size:28px;color:var(--accent)}
 .grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:20px;align-items:start}
 .panel{background:rgba(13,22,40,.88);border:1px solid var(--border);border-radius:22px;padding:clamp(18px,3vw,24px);overflow:hidden}
-.panel-title{color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.panel-title{color:var(--muted);font-size:12px;font-weight:800;letter-spacing:0;text-transform:uppercase;margin-bottom:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .field{margin-bottom:16px}
-.field label{display:block;color:var(--muted);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
-input,textarea,select{width:100%;border:1px solid var(--border);border-radius:14px;background:#0b1426;color:var(--text);padding:14px;font:500 15px 'DM Sans';outline:none}
+.field label{display:block;color:var(--muted);font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:0;margin-bottom:8px}
+input,textarea,select{width:100%;border:1px solid var(--border);border-radius:14px;background:#0b1426;color:var(--text);padding:14px;font:500 15px 'Montserrat';outline:none}
 textarea{min-height:150px;resize:vertical;line-height:1.65}
 textarea#texto{min-height:520px}
 input:focus,textarea:focus,select:focus{border-color:rgba(0,229,160,.45);box-shadow:0 0 0 4px rgba(0,229,160,.08)}
@@ -44,6 +44,8 @@ input:focus,textarea:focus,select:focus{border-color:rgba(0,229,160,.45);box-sha
 .comp input{width:auto;margin-top:4px;accent-color:var(--accent)}
 .comp b{display:block}
 .comp span{display:block;color:var(--muted);font-size:13px}
+.comp-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:3px}
+.level-select{width:auto;min-width:118px;min-height:34px;border-radius:10px;padding:7px 9px;font-size:12px;font-weight:800;color:var(--text);background:#0b1426}
 .progress{height:9px;background:rgba(255,255,255,.06);border-radius:10px;overflow:hidden;margin:12px 0 18px}
 .progress div{height:100%;width:0;background:var(--grad);border-radius:10px;transition:.2s}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
@@ -72,6 +74,7 @@ input:focus,textarea:focus,select:focus{border-color:rgba(0,229,160,.45);box-sha
       <div class="metric"><strong id="palavras">0</strong><span class="muted">palavras</span></div>
       <div class="metric"><strong id="linhas">0</strong><span class="muted">linhas estimadas</span></div>
       <div class="metric"><strong id="checkScore">0/5</strong><span class="muted">competências revisadas</span></div>
+      <div class="metric"><strong id="notaRedacao">0</strong><span class="muted">nota estimada</span></div>
     </div>
   </section>
 
@@ -111,11 +114,11 @@ input:focus,textarea:focus,select:focus{border-color:rgba(0,229,160,.45);box-sha
       <div class="panel-title">Checklist de revisão</div>
       <div class="progress"><div id="progressBar"></div></div>
       <div class="competencias">
-        <label class="comp"><input type="checkbox" class="check"><span><b>Competência 1</b><span>Domínio da norma-padrão e clareza gramatical.</span></span></label>
-        <label class="comp"><input type="checkbox" class="check"><span><b>Competência 2</b><span>Compreensão do tema e uso produtivo de repertório sociocultural.</span></span></label>
-        <label class="comp"><input type="checkbox" class="check"><span><b>Competência 3</b><span>Projeto de texto, argumentação e organização das ideias.</span></span></label>
-        <label class="comp"><input type="checkbox" class="check"><span><b>Competência 4</b><span>Coesão, conectivos e encadeamento entre períodos e parágrafos.</span></span></label>
-        <label class="comp"><input type="checkbox" class="check"><span><b>Competência 5</b><span>Proposta de intervenção completa, respeitando direitos humanos.</span></span></label>
+        <label class="comp"><input type="checkbox" class="check"><span><span class="comp-head"><b>Competência 1</b><select class="level-select"><option value="0">Nível 0</option><option value="40">Nível 1</option><option value="80">Nível 2</option><option value="120">Nível 3</option><option value="160">Nível 4</option><option value="200">Nível 5</option></select></span><span>Domínio da norma-padrão e clareza gramatical.</span></span></label>
+        <label class="comp"><input type="checkbox" class="check"><span><span class="comp-head"><b>Competência 2</b><select class="level-select"><option value="0">Nível 0</option><option value="40">Nível 1</option><option value="80">Nível 2</option><option value="120">Nível 3</option><option value="160">Nível 4</option><option value="200">Nível 5</option></select></span><span>Compreensão do tema e uso produtivo de repertório sociocultural.</span></span></label>
+        <label class="comp"><input type="checkbox" class="check"><span><span class="comp-head"><b>Competência 3</b><select class="level-select"><option value="0">Nível 0</option><option value="40">Nível 1</option><option value="80">Nível 2</option><option value="120">Nível 3</option><option value="160">Nível 4</option><option value="200">Nível 5</option></select></span><span>Projeto de texto, argumentação e organização das ideias.</span></span></label>
+        <label class="comp"><input type="checkbox" class="check"><span><span class="comp-head"><b>Competência 4</b><select class="level-select"><option value="0">Nível 0</option><option value="40">Nível 1</option><option value="80">Nível 2</option><option value="120">Nível 3</option><option value="160">Nível 4</option><option value="200">Nível 5</option></select></span><span>Coesão, conectivos e encadeamento entre períodos e parágrafos.</span></span></label>
+        <label class="comp"><input type="checkbox" class="check"><span><span class="comp-head"><b>Competência 5</b><select class="level-select"><option value="0">Nível 0</option><option value="40">Nível 1</option><option value="80">Nível 2</option><option value="120">Nível 3</option><option value="160">Nível 4</option><option value="200">Nível 5</option></select></span><span>Proposta de intervenção completa, respeitando direitos humanos.</span></span></label>
       </div>
 
       <div class="panel-title" style="margin-top:24px">Estrutura sugerida</div>
@@ -132,10 +135,12 @@ input:focus,textarea:focus,select:focus{border-color:rgba(0,229,160,.45);box-sha
 <script>
 const fields = ['tema', 'repertorio', 'texto'];
 const checks = [...document.querySelectorAll('.check')];
+const levels = [...document.querySelectorAll('.level-select')];
 const texto = document.getElementById('texto');
 const palavras = document.getElementById('palavras');
 const linhas = document.getElementById('linhas');
 const checkScore = document.getElementById('checkScore');
+const notaRedacao = document.getElementById('notaRedacao');
 const progressBar = document.getElementById('progressBar');
 const chipMin = document.getElementById('chipMin');
 const chipIntervencao = document.getElementById('chipIntervencao');
@@ -148,6 +153,7 @@ function restore() {
     if (saved[id]) document.getElementById(id).value = saved[id];
   });
   checks.forEach((check, index) => check.checked = Boolean(saved.checks?.[index]));
+  levels.forEach((level, index) => level.value = saved.levels?.[index] ?? '0');
 }
 
 function save() {
@@ -155,7 +161,8 @@ function save() {
     tema: document.getElementById('tema').value,
     repertorio: document.getElementById('repertorio').value,
     texto: texto.value,
-    checks: checks.map(check => check.checked)
+    checks: checks.map(check => check.checked),
+    levels: levels.map(level => level.value)
   }));
 }
 
@@ -164,11 +171,13 @@ function update() {
   const words = raw ? raw.split(/\s+/).filter(Boolean).length : 0;
   const lineCount = raw ? Math.max(1, Math.ceil(words / 10)) : 0;
   const checked = checks.filter(check => check.checked).length;
+  const grade = levels.reduce((sum, level) => sum + Number(level.value || 0), 0);
   const lower = raw.toLowerCase();
 
   palavras.textContent = words;
   linhas.textContent = lineCount;
   checkScore.textContent = `${checked}/5`;
+  notaRedacao.textContent = grade;
   progressBar.style.width = `${checked * 20}%`;
   chipMin.classList.toggle('ok', words >= 250);
   chipIntervencao.classList.toggle('ok', /(governo|estado|escola|ministério|sociedade|família|mídia).*(deve|precisa|pode|promover|garantir|realizar)/i.test(raw));
@@ -179,6 +188,7 @@ function update() {
 restore();
 fields.forEach(id => document.getElementById(id).addEventListener('input', update));
 checks.forEach(check => check.addEventListener('change', update));
+levels.forEach(level => level.addEventListener('change', update));
 update();
 </script>
 </body>

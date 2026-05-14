@@ -1,22 +1,22 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= e(APP_NAME) ?> - Responder Simulado</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#060b18;--card:#0d1628;--accent:#00e5a0;--accent2:#00b8ff;--text:#eef2ff;--muted:#6b7ba8;--border:rgba(255,255,255,.08);--grad:linear-gradient(135deg,#00e5a0,#00b8ff)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;padding:28px}
-h1,h2,.btn,.tag{font-family:'Syne',sans-serif}
+body{background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;padding:28px}
+h1,h2,.btn,.tag{font-family:'Montserrat',sans-serif}
 .wrap{max-width:980px;margin:0 auto}
 .top{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:26px}
 .top a{color:var(--accent);text-decoration:none;font-weight:800}
-h1{font-size:clamp(36px,6vw,62px);line-height:1;margin-bottom:8px}
+h1{font-size:clamp(36px,6vw,62px);line-height:1.08;margin-bottom:8px}
 .muted{color:var(--muted);overflow-wrap:anywhere}
 .question{background:rgba(13,22,40,.88);border:1px solid var(--border);border-radius:22px;padding:clamp(18px,3vw,24px);margin:18px 0;overflow:hidden}
-.tag{display:inline-flex;color:var(--accent);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px;max-width:100%;overflow-wrap:anywhere}
+.tag{display:inline-flex;color:var(--accent);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0;margin-bottom:12px;max-width:100%;overflow-wrap:anywhere}
 .enunciado{font-size:18px;line-height:1.65;margin-bottom:18px;overflow-wrap:anywhere}
 .opt{display:grid;grid-template-columns:auto 28px minmax(0,1fr);gap:10px;align-items:flex-start;border:1px solid var(--border);border-radius:14px;padding:13px;margin-top:10px;background:rgba(255,255,255,.035);cursor:pointer;min-height:54px}
 .opt:hover{border-color:rgba(0,229,160,.35)}

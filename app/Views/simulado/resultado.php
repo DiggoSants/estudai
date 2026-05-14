@@ -1,19 +1,19 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= e(APP_NAME) ?> - Resultado</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#060b18;--card:#0d1628;--accent:#00e5a0;--danger:#ff6b6b;--text:#eef2ff;--muted:#6b7ba8;--border:rgba(255,255,255,.08);--grad:linear-gradient(135deg,#00e5a0,#00b8ff)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;padding:28px}
-h1,h2,.value,.btn{font-family:'Syne',sans-serif}
+body{background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;padding:28px}
+h1,h2,.value,.btn{font-family:'Montserrat',sans-serif}
 a{text-decoration:none;color:inherit}
 .wrap{max-width:980px;margin:0 auto}
 .hero{background:linear-gradient(160deg,rgba(0,229,160,.08),rgba(0,184,255,.04));border:1px solid rgba(0,229,160,.18);border-radius:24px;padding:clamp(22px,4vw,28px);margin-bottom:22px;overflow:hidden}
-h1{font-size:clamp(40px,7vw,72px);line-height:1;margin-bottom:12px}
+h1{font-size:clamp(40px,7vw,72px);line-height:1.08;margin-bottom:12px}
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:20px}
 .stat{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:16px;padding:18px;min-width:0}
 .value{display:block;font-size:clamp(30px,6vw,38px);background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;overflow-wrap:anywhere}

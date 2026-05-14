@@ -70,10 +70,11 @@ final class DashboardController extends Controller
             SELECT m.nome as materia, m.cor, m.icone,
                    COUNT(*) as tentativas,
                    COUNT(DISTINCT q.id) as questoes,
-                   MIN(q.enunciado) as exemplo
+                   MIN(CONCAT("Questão ", COALESCE(q.numero, q.indice, q.id), " - ", p.vestibular, " ", p.ano)) as exemplo
             FROM respostas r
             JOIN simulados s ON r.simulado_id = s.id
             JOIN questoes q ON r.questao_id = q.id
+            JOIN provas p ON p.id = q.prova_id
             JOIN materias m ON q.materia_id = m.id
             WHERE s.usuario_id = ? AND r.correta = 0 AND s.finalizado_em IS NOT NULL
             GROUP BY m.id, m.nome, m.cor, m.icone
