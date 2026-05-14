@@ -7,6 +7,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\Questao;
 use App\Models\Simulado;
+use App\Services\EnemQuestionImporter;
 
 final class SimuladoController extends Controller
 {
@@ -37,10 +38,31 @@ final class SimuladoController extends Controller
         $dificuldade = (string) ($_POST['dificuldade'] ?? 'todas');
         $quantidade = (int) ($_POST['quantidade'] ?? 10);
 
-        $questoes = (new Questao())->selecionar($materiaIds, $dificuldade, $quantidade);
+        $questaoModel = new Questao();
+        $minimoLocal = max($quantidade * 4, 40);
+        $disponiveis = $questaoModel->contarDisponiveis($materiaIds, $dificuldade);
+
+        if ($disponiveis < $minimoLocal) {
+            $importadas = (new EnemQuestionImporter())->importForFilters($materiaIds, $minimoLocal - $disponiveis);
+
+            if ($importadas > 0) {
+                flash('aviso', formatImportacaoEnem($importadas));
+            }
+        }
+
+        $questoes = $questaoModel->selecionar($materiaIds, $dificuldade, $quantidade);
+
+        if (count($questoes) < $quantidade) {
+            $importadas = (new EnemQuestionImporter())->importForFilters($materiaIds, max($quantidade * 3, 20));
+
+            if ($importadas > 0) {
+                $questoes = $questaoModel->selecionar($materiaIds, $dificuldade, $quantidade);
+                flash('aviso', formatImportacaoEnem($importadas));
+            }
+        }
 
         if ($questoes === []) {
-            flash('erro', 'Não encontrei questões com esses filtros. Tente uma dificuldade diferente ou selecione mais matérias.');
+            flash('erro', 'Não encontrei questões com esses filtros. Tente uma dificuldade diferente, selecione mais matérias ou confira a conexão com a API enem.dev.');
             $this->redirect('simulado');
         }
 
@@ -48,7 +70,7 @@ final class SimuladoController extends Controller
         $_SESSION['simulado_ativo'] = $simuladoId;
 
         if (count($questoes) < $quantidade) {
-            flash('aviso', 'O banco ainda não tem questões suficientes para completar a quantidade pedida. Gere mais questões pelo seed para aumentar a variedade.');
+            flash('aviso', 'Ainda não há questões suficientes para completar a quantidade pedida com esses filtros. O simulado foi criado com o melhor conjunto disponível.');
         }
 
         $this->redirect("simulado/{$simuladoId}");
@@ -81,6 +103,7 @@ final class SimuladoController extends Controller
             'title' => 'Responder Simulado',
             'simulado' => $simulado,
             'questoes' => $model->questoes($simuladoId),
+            'aviso' => flash('aviso'),
         ], '');
     }
 

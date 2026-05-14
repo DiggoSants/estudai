@@ -13,30 +13,31 @@ $force = in_array('--force', $args, true) || in_array('--forced', $args, true);
 $unknownArgs = array_values(array_filter($args, fn (string $arg): bool => ! in_array($arg, ['--force', '--forced'], true)));
 
 if ($unknownArgs !== []) {
-    fwrite(STDERR, 'Argumento desconhecido: ' . implode(', ', $unknownArgs) . "\n");
+    fwrite(STDERR, 'Argumento desconhecido: ' . implode(', ', $unknownArgs) . PHP_EOL);
     exit(1);
 }
 
 $schemaPath = BASE_PATH . '/database/schema.sql';
 
 if (! file_exists($schemaPath)) {
-    fwrite(STDERR, "Schema não encontrado em {$schemaPath}\n");
+    fwrite(STDERR, "Schema não encontrado em {$schemaPath}" . PHP_EOL);
     exit(1);
 }
 
 $sql = file_get_contents($schemaPath);
 
 if ($sql === false || trim($sql) === '') {
-    fwrite(STDERR, "Schema vazio ou inválido.\n");
+    fwrite(STDERR, 'Schema vazio ou inválido.' . PHP_EOL);
     exit(1);
 }
 
 try {
     db()->exec($sql);
+
     echo $force
-        ? "Migração forçada concluída.\n"
-        : "Migração concluída.\n";
+        ? 'Migração forçada concluída.' . PHP_EOL
+        : 'Migração concluída.' . PHP_EOL;
 } catch (Throwable $exception) {
-    fwrite(STDERR, "Erro ao executar migração: {$exception->getMessage()}\n");
+    fwrite(STDERR, "Erro ao executar migração: {$exception->getMessage()}" . PHP_EOL);
     exit(1);
 }

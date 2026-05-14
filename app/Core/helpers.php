@@ -101,6 +101,29 @@ function calcXP(int $acertos, int $total, int $segundos): int
     return $base + $bonus + $velocidade;
 }
 
+function formatTempo(int $segundos): string
+{
+    $segundos = max(0, $segundos);
+
+    if ($segundos < 60) {
+        return $segundos . 's';
+    }
+
+    $minutos = intdiv($segundos, 60);
+    $resto = $segundos % 60;
+
+    return sprintf('%dm%02ds', $minutos, $resto);
+}
+
+function formatImportacaoEnem(int $total): string
+{
+    if ($total === 1) {
+        return '1 questão do ENEM foi importada da enem.dev para ampliar o banco.';
+    }
+
+    return "{$total} questões do ENEM foram importadas da enem.dev para ampliar o banco.";
+}
+
 function checkConquistas(int $userId): array
 {
     $pdo = db();
@@ -123,9 +146,9 @@ function checkConquistas(int $userId): array
     $simulados = $statement->fetch() ?: [];
 
     $statement = $pdo->prepare('
-        SELECT MIN(tempo_gasto) as melhor_tempo
+        SELECT MIN(GREATEST(1, TIMESTAMPDIFF(SECOND, iniciado_em, finalizado_em))) as melhor_tempo
         FROM simulados
-        WHERE usuario_id = ? AND finalizado_em IS NOT NULL AND tempo_gasto IS NOT NULL
+        WHERE usuario_id = ? AND finalizado_em IS NOT NULL
     ');
     $statement->execute([$userId]);
     $tempo = $statement->fetch() ?: [];

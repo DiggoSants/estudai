@@ -36,7 +36,9 @@ final class DashboardController extends Controller
         ', [$uid]);
 
         $ultimos = $this->fetchAll($pdo, '
-            SELECT s.*, DATE_FORMAT(s.finalizado_em, "%d/%m às %H:%i") as data_fmt
+            SELECT s.*,
+                   GREATEST(1, TIMESTAMPDIFF(SECOND, s.iniciado_em, s.finalizado_em)) as tempo_gasto_calculado,
+                   DATE_FORMAT(s.finalizado_em, "%d/%m às %H:%i") as data_fmt
             FROM simulados s
             WHERE s.usuario_id = ? AND s.finalizado_em IS NOT NULL
             ORDER BY s.finalizado_em DESC
@@ -65,14 +67,16 @@ final class DashboardController extends Controller
 
         $todasConquistas = $this->fetchAll($pdo, 'SELECT * FROM conquistas ORDER BY id');
         $erros = $this->fetchAll($pdo, '
-            SELECT q.enunciado, m.nome as materia, m.cor, m.icone, COUNT(*) as tentativas,
-                   SUM(r.correta) as acertos, ROUND((1 - SUM(r.correta) / COUNT(*)) * 100) as erro_pct
+            SELECT m.nome as materia, m.cor, m.icone,
+                   COUNT(*) as tentativas,
+                   COUNT(DISTINCT q.id) as questoes,
+                   MIN(q.enunciado) as exemplo
             FROM respostas r
             JOIN simulados s ON r.simulado_id = s.id
             JOIN questoes q ON r.questao_id = q.id
             JOIN materias m ON q.materia_id = m.id
             WHERE s.usuario_id = ? AND r.correta = 0 AND s.finalizado_em IS NOT NULL
-            GROUP BY q.id, q.enunciado, m.nome, m.cor, m.icone
+            GROUP BY m.id, m.nome, m.cor, m.icone
             ORDER BY tentativas DESC
             LIMIT 3
         ', [$uid]);

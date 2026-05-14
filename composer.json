@@ -8,6 +8,7 @@
   "scripts": {
     "migrate": "php database/migrate.php",
     "migrate:force": "php database/migrate.php --force",
-    "migrate:forced": "php database/migrate.php --forced"
+    "migrate:forced": "php database/migrate.php --forced",
+    "import:enem": "php database/import_enem.php"
   }
 }

@@ -58,6 +58,10 @@ define('DB_USER', $database['user']);
 define('DB_PASS', $database['pass']);
 define('DB_NAME', $database['name']);
 define('DB_CHARSET', 'utf8mb4');
+define('ENEM_API_ENABLED', filter_var(envValue('ENEM_API_ENABLED', 'true'), FILTER_VALIDATE_BOOLEAN));
+define('ENEM_API_BASE_URL', rtrim(envValue('ENEM_API_BASE_URL', 'https://api.enem.dev/v1'), '/'));
+define('ENEM_API_YEARS', envValue('ENEM_API_YEARS', '2023,2022,2021,2020,2019,2018'));
+define('ENEM_API_IMPORT_LIMIT', max(5, (int) envValue('ENEM_API_IMPORT_LIMIT', '30')));
 
 if (session_status() === PHP_SESSION_NONE) {
     $sessionPath = BASE_PATH . '/storage/sessions';

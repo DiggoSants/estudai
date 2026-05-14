@@ -94,14 +94,14 @@
         <div class="streak"><strong style="font-size:30px;color:var(--accent)"><?= (int) $user['streak'] ?></strong><div><strong>dia<?= (int) $user['streak'] !== 1 ? 's' : '' ?> seguido<?= (int) $user['streak'] !== 1 ? 's' : '' ?></strong><div class="muted">Continue estudando todo dia.</div></div></div>
         <div class="heat"><?php foreach ($semana as $dia): ?><div class="day <?= $dia['cnt'] > 1 ? 'hot' : ($dia['cnt'] === 1 ? 'active' : '') ?>"><?= e(strtoupper(substr($dia['label'], 0, 2))) ?><br><?= $dia['cnt'] > 0 ? (int) $dia['cnt'] : '.' ?></div><?php endforeach; ?></div>
       </div>
-      <?php if (count($erros) > 0): ?><div class="panel"><div class="panel-title">Questões mais erradas</div><?php foreach ($erros as $erro): ?><div class="error-item"><strong><?= e($erro['icone']) ?> <?= e($erro['materia']) ?> - <?= (int) $erro['tentativas'] ?> erros</strong><div class="muted"><?= e($erro['enunciado']) ?></div></div><?php endforeach; ?></div><?php endif; ?>
+      <?php if (count($erros) > 0): ?><div class="panel"><div class="panel-title">Matérias para revisar</div><?php foreach ($erros as $erro): $totalErros = (int) $erro['tentativas']; $totalQuestoesErro = (int) $erro['questoes']; ?><div class="error-item"><strong><?= e($erro['icone']) ?> <?= e($erro['materia']) ?> - <?= $totalErros ?> erro<?= $totalErros !== 1 ? 's' : '' ?> em <?= $totalQuestoesErro ?> <?= $totalQuestoesErro === 1 ? 'questão' : 'questões' ?></strong><div class="muted">Exemplo: <?= e($erro['exemplo']) ?></div></div><?php endforeach; ?></div><?php endif; ?>
     </div>
   </section>
 
   <section class="panel" id="historico" style="margin-bottom:20px">
     <div class="panel-title">Últimos simulados <a href="<?= url('simulado') ?>" style="color:var(--accent)">Novo</a></div>
-    <?php if (count($ultimos) > 0): foreach ($ultimos as $sim): $pct = (int) $sim['total'] > 0 ? round((int) $sim['acertos'] / (int) $sim['total'] * 100) : 0; $cor = $pct >= 70 ? 'var(--accent)' : ($pct >= 50 ? 'var(--warn)' : 'var(--danger)'); $min = floor((int) $sim['tempo_gasto'] / 60); $seg = (int) $sim['tempo_gasto'] % 60; ?>
-      <div class="sim"><div class="sim-left"><div class="circle" style="border-color:<?= $cor ?>;color:<?= $cor ?>;background:rgba(255,255,255,.04)"><?= $pct ?>%</div><div><strong><?= (int) $sim['acertos'] ?>/<?= (int) $sim['total'] ?> acertos</strong><div class="muted"><?= e($sim['data_fmt']) ?> - <?= $min ?>m<?= $seg ?>s</div></div></div><strong style="color:var(--accent)">+<?= (int) $sim['xp_ganho'] ?> XP</strong></div>
+    <?php if (count($ultimos) > 0): foreach ($ultimos as $sim): $pct = (int) $sim['total'] > 0 ? round((int) $sim['acertos'] / (int) $sim['total'] * 100) : 0; $cor = $pct >= 70 ? 'var(--accent)' : ($pct >= 50 ? 'var(--warn)' : 'var(--danger)'); $tempoGasto = (int) ($sim['tempo_gasto_calculado'] ?? $sim['tempo_gasto'] ?? 0); ?>
+      <div class="sim"><div class="sim-left"><div class="circle" style="border-color:<?= $cor ?>;color:<?= $cor ?>;background:rgba(255,255,255,.04)"><?= $pct ?>%</div><div><strong><?= (int) $sim['acertos'] ?>/<?= (int) $sim['total'] ?> acertos</strong><div class="muted"><?= e($sim['data_fmt']) ?> - <?= e(formatTempo($tempoGasto)) ?></div></div></div><strong style="color:var(--accent)">+<?= (int) $sim['xp_ganho'] ?> XP</strong></div>
     <?php endforeach; else: ?><div class="empty">Você ainda não fez nenhum simulado. <a href="<?= url('simulado') ?>" style="color:var(--accent)">Começar agora</a></div><?php endif; ?>
   </section>
 

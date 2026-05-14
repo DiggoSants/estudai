@@ -60,9 +60,23 @@ final class Simulado extends Model
 
     public function buscar(int $simuladoId, int $usuarioId): ?array
     {
-        $statement = $this->db->prepare('SELECT * FROM simulados WHERE id = ? AND usuario_id = ? LIMIT 1');
+        $statement = $this->db->prepare('
+            SELECT s.*,
+                   CASE
+                       WHEN s.finalizado_em IS NOT NULL
+                       THEN GREATEST(1, TIMESTAMPDIFF(SECOND, s.iniciado_em, s.finalizado_em))
+                       ELSE s.tempo_gasto
+                   END as tempo_gasto_calculado
+            FROM simulados s
+            WHERE s.id = ? AND s.usuario_id = ?
+            LIMIT 1
+        ');
         $statement->execute([$simuladoId, $usuarioId]);
         $simulado = $statement->fetch();
+
+        if ($simulado) {
+            $simulado['tempo_gasto'] = $simulado['tempo_gasto_calculado'] ?? $simulado['tempo_gasto'];
+        }
 
         return $simulado ?: null;
     }
@@ -70,10 +84,52 @@ final class Simulado extends Model
     public function questoes(int $simuladoId): array
     {
         $statement = $this->db->prepare('
-            SELECT q.*, r.resposta, r.correta, m.nome as materia_nome, m.cor as materia_cor, m.icone as materia_icone
+            SELECT
+                q.id,
+                q.prova_id,
+                q.materia_id,
+                q.numero,
+                q.indice,
+                q.disciplina_original,
+                q.idioma,
+                q.dificuldade,
+                q.enunciado,
+                q.contexto,
+                q.alternativas_intro,
+                q.gabarito,
+                q.explicacao,
+                q.origem,
+                q.external_id,
+                q.ativa,
+                q.criado_em,
+                p.ano,
+                p.vestibular,
+                p.edicao,
+                r.resposta,
+                r.correta,
+                m.nome as materia_nome,
+                m.cor as materia_cor,
+                m.icone as materia_icone,
+                alt.alternativa_a,
+                alt.alternativa_b,
+                alt.alternativa_c,
+                alt.alternativa_d,
+                alt.alternativa_e
             FROM respostas r
             JOIN questoes q ON q.id = r.questao_id
+            JOIN provas p ON p.id = q.prova_id
             JOIN materias m ON m.id = q.materia_id
+            JOIN (
+                SELECT
+                    questao_id,
+                    MAX(CASE WHEN letra = \'a\' THEN texto END) as alternativa_a,
+                    MAX(CASE WHEN letra = \'b\' THEN texto END) as alternativa_b,
+                    MAX(CASE WHEN letra = \'c\' THEN texto END) as alternativa_c,
+                    MAX(CASE WHEN letra = \'d\' THEN texto END) as alternativa_d,
+                    MAX(CASE WHEN letra = \'e\' THEN texto END) as alternativa_e
+                FROM alternativas
+                GROUP BY questao_id
+            ) alt ON alt.questao_id = q.id
             WHERE r.simulado_id = ?
             ORDER BY r.id
         ');
@@ -117,7 +173,13 @@ final class Simulado extends Model
                 $update->execute([$resposta, $correta, $simuladoId, $questaoId]);
             }
 
-            $tempo = max(1, time() - strtotime((string) $simulado['iniciado_em']));
+            $tempoStatement = $this->db->prepare('
+                SELECT GREATEST(1, TIMESTAMPDIFF(SECOND, iniciado_em, NOW())) as tempo
+                FROM simulados
+                WHERE id = ? AND usuario_id = ?
+            ');
+            $tempoStatement->execute([$simuladoId, $usuarioId]);
+            $tempo = (int) ($tempoStatement->fetch()['tempo'] ?? 1);
             $xp = calcXP($acertos, $total, $tempo);
 
             $statement = $this->db->prepare('
