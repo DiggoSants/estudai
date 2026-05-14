@@ -6,11 +6,47 @@ define('APP_NAME', 'Estudai');
 define('APP_URL', rtrim($_ENV['APP_URL'] ?? getenv('APP_URL') ?: 'http://localhost/estudai', '/'));
 define('SESSION_NAME', 'estudai_sess');
 
-define('DB_HOST', $_ENV['DB_HOST'] ?? getenv('DB_HOST') ?: 'localhost');
-define('DB_PORT', (int) ($_ENV['DB_PORT'] ?? getenv('DB_PORT') ?: 3306));
-define('DB_USER', $_ENV['DB_USER'] ?? getenv('DB_USER') ?: 'root');
-define('DB_PASS', $_ENV['DB_PASS'] ?? getenv('DB_PASS') ?: '');
-define('DB_NAME', $_ENV['DB_NAME'] ?? getenv('DB_NAME') ?: 'estudai');
+function envValue(string $key, ?string $fallback = null): ?string
+{
+    $value = $_ENV[$key] ?? getenv($key);
+
+    return $value !== false && $value !== '' ? (string) $value : $fallback;
+}
+
+function databaseConfig(): array
+{
+    $databaseUrl = envValue('DATABASE_URL');
+
+    if ($databaseUrl) {
+        $parts = parse_url($databaseUrl);
+
+        if ($parts !== false) {
+            return [
+                'host' => $parts['host'] ?? 'localhost',
+                'port' => (int) ($parts['port'] ?? 3306),
+                'user' => urldecode($parts['user'] ?? 'root'),
+                'pass' => urldecode($parts['pass'] ?? ''),
+                'name' => ltrim($parts['path'] ?? '/estudai', '/'),
+            ];
+        }
+    }
+
+    return [
+        'host' => envValue('DB_HOST', envValue('MYSQLHOST', 'localhost')),
+        'port' => (int) envValue('DB_PORT', envValue('MYSQLPORT', '3306')),
+        'user' => envValue('DB_USER', envValue('MYSQLUSER', 'root')),
+        'pass' => envValue('DB_PASS', envValue('MYSQLPASSWORD', '')),
+        'name' => envValue('DB_NAME', envValue('MYSQLDATABASE', 'estudai')),
+    ];
+}
+
+$database = databaseConfig();
+
+define('DB_HOST', $database['host']);
+define('DB_PORT', $database['port']);
+define('DB_USER', $database['user']);
+define('DB_PASS', $database['pass']);
+define('DB_NAME', $database['name']);
 define('DB_CHARSET', 'utf8mb4');
 
 if (session_status() === PHP_SESSION_NONE) {
