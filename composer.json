@@ -1,0 +1,8 @@
+{
+  "name": "estudai/app",
+  "description": "Estudai PHP MVC app",
+  "type": "project",
+  "require": {
+    "php": "^8.2"
+  }
+}
