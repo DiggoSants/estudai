@@ -48,7 +48,10 @@ p{color:var(--muted);line-height:1.7;overflow-wrap:anywhere}
 <main class="wrap">
   <div class="top">
     <a class="logo" href="<?= url('dashboard') ?>"><div class="logo-icon">E</div><span class="logo-text">Estudai</span></a>
-    <a class="btn ghost" href="<?= url('dashboard') ?>">Voltar ao dashboard</a>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+      <a class="btn ghost" href="<?= url('redacao') ?>">Oficina de redação</a>
+      <a class="btn ghost" href="<?= url('dashboard') ?>">Voltar ao dashboard</a>
+    </div>
   </div>
 
   <section class="panel">

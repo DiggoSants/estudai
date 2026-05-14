@@ -32,6 +32,7 @@ if ($sql === false || trim($sql) === '') {
 }
 
 try {
+    ensureDatabaseExists();
     db()->exec($sql);
 
     echo $force
@@ -40,4 +41,23 @@ try {
 } catch (Throwable $exception) {
     fwrite(STDERR, "Erro ao executar migração: {$exception->getMessage()}" . PHP_EOL);
     exit(1);
+}
+
+function ensureDatabaseExists(): void
+{
+    $dsn = sprintf(
+        'mysql:host=%s;port=%d;charset=%s',
+        DB_HOST,
+        DB_PORT,
+        DB_CHARSET
+    );
+
+    $database = str_replace('`', '``', DB_NAME);
+    $pdo = new PDO($dsn, DB_USER, DB_PASS, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_EMULATE_PREPARES => false,
+    ]);
+
+    $pdo->exec("CREATE DATABASE IF NOT EXISTS `{$database}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
 }

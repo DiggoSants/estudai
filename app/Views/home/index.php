@@ -39,7 +39,7 @@ section{position:relative;z-index:1;padding:110px 7%}.bg2{background:var(--bg2)}
       </div>
       <div class="stats">
         <div class="stat"><strong>100+</strong><span>questões iniciais</span></div>
-        <div class="stat"><strong>10</strong><span>matérias</span></div>
+        <div class="stat"><strong>16</strong><span>matérias ENEM</span></div>
         <div class="stat"><strong>IA</strong><span>diagnóstico inteligente</span></div>
       </div>
     </div>
@@ -78,7 +78,7 @@ section{position:relative;z-index:1;padding:110px 7%}.bg2{background:var(--bg2)}
       <div class="card reveal"><div class="icon">Q</div><h3>Simulados objetivos</h3><p>Questões organizadas para medir desempenho e gerar histórico útil.</p></div>
       <div class="card reveal"><div class="icon">XP</div><h3>Gamificação</h3><p>XP, níveis, streaks e conquistas mantêm o estudo vivo sem virar bagunça.</p></div>
       <div class="card reveal"><div class="icon">IA</div><h3>Recomendação do dia</h3><p>O dashboard aponta a matéria mais urgente com base no seu histórico.</p></div>
-      <div class="card reveal"><div class="icon">R</div><h3>Relatórios claros</h3><p>Gráficos e rankings por matéria ajudam a comparar progresso de verdade.</p></div>
+      <div class="card reveal"><div class="icon">R</div><h3>Oficina de redação</h3><p>Planeje, escreva e revise seu texto com checklist das 5 competências do ENEM.</p></div>
     </div>
   </section>
 

@@ -37,7 +37,13 @@ INSERT INTO materias (id, nome, cor, icone) VALUES
     (7, 'Geografia', '#2aa0c9', 'GEO'),
     (8, 'Inglês', '#d94a90', 'ING'),
     (9, 'Filosofia', '#8b6914', 'FIL'),
-    (10, 'Sociologia', '#6b7a8d', 'SOC')
+    (10, 'Sociologia', '#6b7a8d', 'SOC'),
+    (11, 'Literatura', '#ff9f1c', 'LIT'),
+    (12, 'Artes', '#f15bb5', 'ART'),
+    (13, 'Educação Física', '#90be6d', 'EDF'),
+    (14, 'Espanhol', '#f94144', 'ESP'),
+    (15, 'Tecnologias', '#577590', 'TIC'),
+    (16, 'Redação', '#ffd166', 'RED')
 ON DUPLICATE KEY UPDATE
     nome = VALUES(nome),
     cor = VALUES(cor),

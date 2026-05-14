@@ -22,7 +22,10 @@
 <header class="topbar">
   <button class="menu-btn" type="button" aria-label="Abrir menu" onclick="document.body.classList.add('menu-open')"><span></span><span></span><span></span></button>
   <a href="<?= url('dashboard') ?>" class="logo"><div class="logo-icon">E</div><span class="logo-text">Estudai</span></a>
-  <a class="btn" href="<?= url('simulado') ?>">Simulado</a>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
+    <a class="btn ghost" href="<?= url('redacao') ?>" style="box-shadow:none">Redação</a>
+    <a class="btn" href="<?= url('simulado') ?>">Simulado</a>
+  </div>
 </header>
 <button class="drawer-overlay" type="button" aria-label="Fechar menu" onclick="document.body.classList.remove('menu-open')"></button>
 <aside class="sidebar">
@@ -33,6 +36,7 @@
   <div class="nav-section">Principal</div>
   <a href="<?= url('dashboard') ?>" class="nav-link active">Dashboard</a>
   <a href="<?= url('simulado') ?>" class="nav-link">Novo simulado</a>
+  <a href="<?= url('redacao') ?>" class="nav-link">Oficina de redação</a>
   <div class="nav-section">Histórico</div>
   <a href="#historico" class="nav-link">Meus simulados</a>
   <a href="#conquistas" class="nav-link">Conquistas</a>

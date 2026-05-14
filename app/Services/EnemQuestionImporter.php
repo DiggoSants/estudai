@@ -27,7 +27,7 @@ final class EnemQuestionImporter
         $target = max(1, min(300, $target));
         $imported = 0;
         $years = $this->years();
-        $language = in_array(8, $materiaIds, true) ? 'ingles' : null;
+        $language = $this->languageFilter($materiaIds);
 
         foreach ($years as $year) {
             if ($imported >= $target) {
@@ -272,7 +272,7 @@ final class EnemQuestionImporter
 
         $materiaId = match ($discipline) {
             'matematica' => 1,
-            'linguagens' => $this->mapLanguageSubject($language, $materiaIds),
+            'linguagens' => $this->mapLanguageSubject($language, $text, $materiaIds),
             'ciencias-natureza' => $this->mapBroadSubject($this->inferNatureSubject($text), [3, 4, 5], $materiaIds),
             'ciencias-humanas' => $this->mapBroadSubject($this->inferHumanSubject($text), [6, 7, 9, 10], $materiaIds),
             default => null,
@@ -289,19 +289,37 @@ final class EnemQuestionImporter
         return $materiaId;
     }
 
-    private function mapLanguageSubject(string $language, array $materiaIds): ?int
+    private function languageFilter(array $materiaIds): ?string
     {
-        $materiaId = $language === 'ingles' ? 8 : 2;
+        $wantsEnglish = in_array(8, $materiaIds, true);
+        $wantsSpanish = in_array(14, $materiaIds, true);
+
+        if ($wantsEnglish && ! $wantsSpanish) {
+            return 'ingles';
+        }
+
+        if ($wantsSpanish && ! $wantsEnglish) {
+            return 'espanhol';
+        }
+
+        return null;
+    }
+
+    private function mapLanguageSubject(string $language, string $text, array $materiaIds): ?int
+    {
+        $materiaId = match ($language) {
+            'ingles' => 8,
+            'espanhol' => 14,
+            default => $this->inferLanguageSubject($text),
+        };
 
         if ($materiaIds === [] || in_array($materiaId, $materiaIds, true)) {
             return $materiaId;
         }
 
-        if ($language !== 'ingles' && in_array(2, $materiaIds, true)) {
-            return 2;
-        }
+        $compatible = array_values(array_intersect([2, 11, 12, 13, 15], $materiaIds));
 
-        return null;
+        return $compatible[0] ?? null;
     }
 
     private function mapBroadSubject(int $inferred, array $accepted, array $materiaIds): ?int
@@ -343,6 +361,27 @@ final class EnemQuestionImporter
         }
 
         return 6;
+    }
+
+    private function inferLanguageSubject(string $text): int
+    {
+        if ($this->hasAny($text, ['poema', 'romance', 'conto', 'narrador', 'literatura', 'modernismo', 'barroco'])) {
+            return 11;
+        }
+
+        if ($this->hasAny($text, ['obra', 'artista', 'pintura', 'escultura', 'música', 'teatro', 'dança', 'arte'])) {
+            return 12;
+        }
+
+        if ($this->hasAny($text, ['corpo', 'esporte', 'atividade física', 'jogo', 'dança', 'saúde corporal'])) {
+            return 13;
+        }
+
+        if ($this->hasAny($text, ['internet', 'tecnologia', 'digital', 'mídia', 'rede social', 'informação', 'comunicação'])) {
+            return 15;
+        }
+
+        return 2;
     }
 
     private function hasAny(string $text, array $needles): bool
