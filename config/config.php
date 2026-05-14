@@ -15,7 +15,7 @@ function envValue(string $key, ?string $fallback = null): ?string
 
 function databaseConfig(): array
 {
-    $databaseUrl = envValue('DATABASE_URL');
+    $databaseUrl = envValue('DATABASE_URL', envValue('MYSQL_URL'));
 
     if ($databaseUrl) {
         $parts = parse_url($databaseUrl);
