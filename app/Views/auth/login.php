@@ -19,19 +19,19 @@
   <section class="left">
     <a href="<?= url() ?>" class="logo"><div class="logo-icon">E</div><span class="logo-text">Estudai</span></a>
     <div>
-      <h1><?= $tab === 'register' ? 'Comece sua jornada no <em>Estudai.</em>' : 'Continue de onde voce <em>parou.</em>' ?></h1>
+      <h1><?= $tab === 'register' ? 'Comece sua jornada no <em>Estudai.</em>' : 'Continue de onde você <em>parou.</em>' ?></h1>
       <p>Entre direto no sistema para fazer simulados, acompanhar XP, ver seus pontos fracos e transformar erro em rota de estudo.</p>
     </div>
     <div class="feature-list">
       <div class="feature"><span class="dot"></span><div><b>Acesso direto:</b> cadastro criado, dashboard liberado.</div></div>
-      <div class="feature"><span class="dot"></span><div><b>Diagnostico real:</b> desempenho por materia e recomendacao diaria.</div></div>
-      <div class="feature"><span class="dot"></span><div><b>Gamificacao:</b> XP, streaks e conquistas para manter ritmo.</div></div>
+      <div class="feature"><span class="dot"></span><div><b>Diagnóstico real:</b> desempenho por matéria e recomendação diária.</div></div>
+      <div class="feature"><span class="dot"></span><div><b>Gamificação:</b> XP, streaks e conquistas para manter ritmo.</div></div>
     </div>
   </section>
 
   <section class="right">
     <div class="box">
-      <a href="<?= url() ?>" class="back">Voltar ao inicio</a>
+      <a href="<?= url() ?>" class="back">Voltar ao início</a>
       <div class="tabs">
         <a href="<?= url('login?tab=login') ?>" class="tab <?= $tab === 'login' ? 'active' : '' ?>">Entrar</a>
         <a href="<?= url('login?tab=register') ?>" class="tab <?= $tab === 'register' ? 'active' : '' ?>">Criar conta</a>
@@ -48,19 +48,19 @@
           <div class="field"><label>Senha</label><input type="password" name="senha" placeholder="Sua senha" required></div>
           <button class="btn" type="submit">Entrar</button>
         </form>
-        <div class="switch">Nao tem conta? <a href="<?= url('login?tab=register') ?>">Criar gratuitamente</a></div>
+        <div class="switch">Não tem conta? <a href="<?= url('login?tab=register') ?>">Criar gratuitamente</a></div>
       <?php else: ?>
-        <h2 class="form-title">Criar conta gratis</h2>
-        <p class="form-sub">Sem confirmacao manual. Voce entra e ja pode estudar.</p>
+        <h2 class="form-title">Criar conta grátis</h2>
+        <p class="form-sub">Sem confirmação manual. Você entra e já pode estudar.</p>
         <form action="<?= url('register') ?>" method="POST">
           <input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>">
-          <div class="field"><label>Nome completo</label><input type="text" name="nome" placeholder="Joao Silva" value="<?= e($_POST['nome'] ?? '') ?>" required autofocus></div>
+          <div class="field"><label>Nome completo</label><input type="text" name="nome" placeholder="João Silva" value="<?= e($_POST['nome'] ?? '') ?>" required autofocus></div>
           <div class="field"><label>E-mail</label><input type="email" name="email" placeholder="seu@email.com" value="<?= e($_POST['email'] ?? '') ?>" required></div>
-          <div class="field"><label>Senha</label><input type="password" name="senha" placeholder="Minimo 6 caracteres" required></div>
+          <div class="field"><label>Senha</label><input type="password" name="senha" placeholder="Mínimo 6 caracteres" required></div>
           <div class="field"><label>Confirmar senha</label><input type="password" name="confirmar" placeholder="Repita a senha" required></div>
           <button class="btn" type="submit">Criar conta</button>
         </form>
-        <div class="switch">Ja tem conta? <a href="<?= url('login') ?>">Fazer login</a></div>
+        <div class="switch">Já tem conta? <a href="<?= url('login') ?>">Fazer login</a></div>
       <?php endif; ?>
     </div>
   </section>

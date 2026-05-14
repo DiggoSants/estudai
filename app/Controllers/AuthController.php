@@ -48,7 +48,7 @@ final class AuthController extends Controller
                 $this->redirect('dashboard');
             }
 
-            $erro = 'E-mail ou senha invalidos.';
+            $erro = 'E-mail ou senha inválidos.';
         }
 
         $this->view('auth/login', [
@@ -73,21 +73,21 @@ final class AuthController extends Controller
         if ($nome === '' || $email === '' || $senha === '' || $confirmar === '') {
             $erro = 'Preencha todos os campos.';
         } elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $erro = 'E-mail invalido.';
+            $erro = 'E-mail inválido.';
         } elseif (strlen($senha) < 6) {
             $erro = 'A senha deve ter pelo menos 6 caracteres.';
         } elseif ($senha !== $confirmar) {
-            $erro = 'As senhas nao coincidem.';
+            $erro = 'As senhas não coincidem.';
         } else {
             $model = new User();
 
             if ($model->emailExists($email)) {
-                $erro = 'Este e-mail ja esta cadastrado.';
+                $erro = 'Este e-mail já está cadastrado.';
             } else {
                 $cores = ['#6b4de6', '#e85d4a', '#4ab89a', '#e8c547', '#4a90d9', '#d94a90'];
                 $model->create($nome, $email, password_hash($senha, PASSWORD_BCRYPT), $cores[array_rand($cores)]);
 
-                flash('ok', 'Conta criada! Faca login para comecar.');
+                flash('ok', 'Conta criada! Faça login para começar.');
                 $this->redirect('login');
             }
         }

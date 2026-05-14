@@ -20,23 +20,23 @@ if ($unknownArgs !== []) {
 $schemaPath = BASE_PATH . '/database/schema.sql';
 
 if (! file_exists($schemaPath)) {
-    fwrite(STDERR, "Schema nao encontrado em {$schemaPath}\n");
+    fwrite(STDERR, "Schema não encontrado em {$schemaPath}\n");
     exit(1);
 }
 
 $sql = file_get_contents($schemaPath);
 
 if ($sql === false || trim($sql) === '') {
-    fwrite(STDERR, "Schema vazio ou invalido.\n");
+    fwrite(STDERR, "Schema vazio ou inválido.\n");
     exit(1);
 }
 
 try {
     db()->exec($sql);
     echo $force
-        ? "Migracao forcada concluida.\n"
-        : "Migracao concluida.\n";
+        ? "Migração forçada concluída.\n"
+        : "Migração concluída.\n";
 } catch (Throwable $exception) {
-    fwrite(STDERR, "Erro ao executar migracao: {$exception->getMessage()}\n");
+    fwrite(STDERR, "Erro ao executar migração: {$exception->getMessage()}\n");
     exit(1);
 }

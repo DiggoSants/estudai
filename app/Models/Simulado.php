@@ -87,7 +87,7 @@ final class Simulado extends Model
         $simulado = $this->buscar($simuladoId, $usuarioId);
 
         if (! $simulado) {
-            throw new \RuntimeException('Simulado nao encontrado.');
+            throw new \RuntimeException('Simulado não encontrado.');
         }
 
         if ($simulado['finalizado_em'] !== null) {
@@ -144,7 +144,7 @@ final class Simulado extends Model
         $simulado = $this->buscar($simuladoId, $usuarioId);
 
         if (! $simulado) {
-            throw new \RuntimeException('Simulado nao encontrado.');
+            throw new \RuntimeException('Simulado não encontrado.');
         }
 
         return [

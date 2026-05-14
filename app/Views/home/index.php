@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><?= e(APP_NAME) ?> - Sua direcao de estudo inteligente</title>
+<title><?= e(APP_NAME) ?> - Sua direção de estudo inteligente</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#060b18;--bg2:#080e1c;--card:#0d1628;--card2:#111e38;--accent:#00e5a0;--accent2:#00b8ff;--danger:#ff6b6b;--text:#eef2ff;--muted:#6b7ba8;--border:rgba(255,255,255,.08);--grad:linear-gradient(135deg,#00e5a0,#00b8ff)}
@@ -24,7 +24,7 @@ section{position:relative;z-index:1;padding:110px 7%}.bg2{background:var(--bg2)}
     <li><a href="#funcionalidades">Funcionalidades</a></li>
     <li><a href="#planos">Planos</a></li>
   </ul>
-  <a class="nav-cta" href="<?= url('login?tab=register') ?>">Comecar gratis</a>
+  <a class="nav-cta" href="<?= url('login?tab=register') ?>">Começar grátis</a>
 </nav>
 
 <main>
@@ -32,15 +32,15 @@ section{position:relative;z-index:1;padding:110px 7%}.bg2{background:var(--bg2)}
     <div class="hero-inner">
       <div class="badge"><span></span> Plataforma com IA para vestibulares</div>
       <h1>Pare de estudar no<br><em>escuro.</em></h1>
-      <p>O Estudai analisa seu desempenho e indica exatamente o que voce precisa revisar. Nada de tempo perdido. So evolucao real.</p>
+      <p>O Estudai analisa seu desempenho e indica exatamente o que você precisa revisar. Nada de tempo perdido. Só evolução real.</p>
       <div class="actions">
-        <a class="btn btn-primary" href="<?= url('login?tab=register') ?>">Criar conta gratis</a>
+        <a class="btn btn-primary" href="<?= url('login?tab=register') ?>">Criar conta grátis</a>
         <a class="btn btn-secondary" href="#como-funciona">Ver como funciona</a>
       </div>
       <div class="stats">
-        <div class="stat"><strong>100+</strong><span>questoes iniciais</span></div>
-        <div class="stat"><strong>10</strong><span>materias</span></div>
-        <div class="stat"><strong>IA</strong><span>diagnostico inteligente</span></div>
+        <div class="stat"><strong>100+</strong><span>questões iniciais</span></div>
+        <div class="stat"><strong>10</strong><span>matérias</span></div>
+        <div class="stat"><strong>IA</strong><span>diagnóstico inteligente</span></div>
       </div>
     </div>
   </section>
@@ -51,34 +51,34 @@ section{position:relative;z-index:1;padding:110px 7%}.bg2{background:var(--bg2)}
       <h2>Simples assim<br>em <em>4 passos</em></h2>
     </div>
     <div class="steps">
-      <div class="step reveal"><div class="step-num">01</div><h3>Crie sua conta</h3><p>Cadastro direto no sistema, sem fila de espera e sem confirmacao manual por e-mail.</p></div>
-      <div class="step reveal"><div class="step-num">02</div><h3>Faca simulados</h3><p>Resolva questoes por materia e dificuldade, no ritmo certo para sua preparacao.</p></div>
-      <div class="step reveal"><div class="step-num">03</div><h3>Receba diagnostico</h3><p>A plataforma identifica seus erros e transforma desempenho em prioridade de estudo.</p></div>
-      <div class="step reveal"><div class="step-num">04</div><h3>Siga evoluindo</h3><p>Acompanhe XP, streak, conquistas e desempenho por materia no dashboard.</p></div>
+      <div class="step reveal"><div class="step-num">01</div><h3>Crie sua conta</h3><p>Cadastro direto no sistema, sem fila de espera e sem confirmação manual por e-mail.</p></div>
+      <div class="step reveal"><div class="step-num">02</div><h3>Faça simulados</h3><p>Resolva questões por matéria e dificuldade, no ritmo certo para sua preparação.</p></div>
+      <div class="step reveal"><div class="step-num">03</div><h3>Receba diagnóstico</h3><p>A plataforma identifica seus erros e transforma desempenho em prioridade de estudo.</p></div>
+      <div class="step reveal"><div class="step-num">04</div><h3>Siga evoluindo</h3><p>Acompanhe XP, streak, conquistas e desempenho por matéria no dashboard.</p></div>
     </div>
   </section>
 
   <section id="funcionalidades">
     <div class="section-head reveal">
       <div class="tag">Funcionalidades</div>
-      <h2>Tudo que voce precisa<br><em>em um lugar</em></h2>
-      <p>Ferramentas inteligentes pensadas para quem quer estudar com direcao.</p>
+      <h2>Tudo que você precisa<br><em>em um lugar</em></h2>
+      <p>Ferramentas inteligentes pensadas para quem quer estudar com direção.</p>
     </div>
     <div class="cards">
       <div class="card big reveal">
         <div class="icon">M</div>
         <h3>Mapa inteligente de aprendizado</h3>
-        <p>Veja quais materias estao fortes, quais precisam de revisao e onde vale colocar energia agora.</p>
+        <p>Veja quais matérias estão fortes, quais precisam de revisão e onde vale colocar energia agora.</p>
         <div class="demo">
-          <div class="demo-row"><span>Funcoes</span><div class="bar"><div class="fill" style="width:94%"></div></div><strong>94%</strong></div>
+          <div class="demo-row"><span>Funções</span><div class="bar"><div class="fill" style="width:94%"></div></div><strong>94%</strong></div>
           <div class="demo-row"><span>Geometria</span><div class="bar"><div class="fill" style="width:41%;background:linear-gradient(135deg,#ffd166,#ff9f1c)"></div></div><strong>41%</strong></div>
           <div class="demo-row"><span>Probabilidade</span><div class="bar"><div class="fill" style="width:22%;background:linear-gradient(135deg,#ff6b6b,#ff3b3b)"></div></div><strong>22%</strong></div>
         </div>
       </div>
-      <div class="card reveal"><div class="icon">Q</div><h3>Simulados objetivos</h3><p>Questoes organizadas para medir desempenho e gerar historico util.</p></div>
-      <div class="card reveal"><div class="icon">XP</div><h3>Gamificacao</h3><p>XP, niveis, streaks e conquistas mantem o estudo vivo sem virar bagunca.</p></div>
-      <div class="card reveal"><div class="icon">IA</div><h3>Recomendacao do dia</h3><p>O dashboard aponta a materia mais urgente com base no seu historico.</p></div>
-      <div class="card reveal"><div class="icon">R</div><h3>Relatorios claros</h3><p>Graficos e rankings por materia ajudam a comparar progresso de verdade.</p></div>
+      <div class="card reveal"><div class="icon">Q</div><h3>Simulados objetivos</h3><p>Questões organizadas para medir desempenho e gerar histórico útil.</p></div>
+      <div class="card reveal"><div class="icon">XP</div><h3>Gamificação</h3><p>XP, níveis, streaks e conquistas mantêm o estudo vivo sem virar bagunça.</p></div>
+      <div class="card reveal"><div class="icon">IA</div><h3>Recomendação do dia</h3><p>O dashboard aponta a matéria mais urgente com base no seu histórico.</p></div>
+      <div class="card reveal"><div class="icon">R</div><h3>Relatórios claros</h3><p>Gráficos e rankings por matéria ajudam a comparar progresso de verdade.</p></div>
     </div>
   </section>
 
@@ -86,11 +86,11 @@ section{position:relative;z-index:1;padding:110px 7%}.bg2{background:var(--bg2)}
     <div class="section-head reveal">
       <div class="tag">Experimente</div>
       <h2>O estudo fica melhor<br><em>quando o erro vira rota</em></h2>
-      <p>Ao terminar um simulado, voce entende onde perdeu ponto e o que estudar em seguida.</p>
+      <p>Ao terminar um simulado, você entende onde perdeu ponto e o que estudar em seguida.</p>
     </div>
     <div class="quiz-card reveal">
-      <div class="quiz-top"><span>Matematica - ENEM</span><span>Questao 3 de 5</span></div>
-      <div class="question">Uma progressao aritmetica tem primeiro termo 3 e razao 4. Qual e o 10o termo?</div>
+      <div class="quiz-top"><span>Matemática - ENEM</span><span>Questão 3 de 5</span></div>
+      <div class="question">Uma progressão aritmética tem primeiro termo 3 e razão 4. Qual é o 10º termo?</div>
       <div class="opt">A) 35</div>
       <div class="opt">B) 40</div>
       <div class="opt correct">C) 39</div>
@@ -101,20 +101,20 @@ section{position:relative;z-index:1;padding:110px 7%}.bg2{background:var(--bg2)}
   <section class="bg2" id="planos">
     <div class="section-head center reveal">
       <div class="tag">Acesso</div>
-      <h2>Comece <em>gratis</em><br>pelo sistema real</h2>
-      <p>Sem pre-cadastro por e-mail. Criou a conta, entrou no dashboard.</p>
+      <h2>Comece <em>grátis</em><br>pelo sistema real</h2>
+      <p>Sem pré-cadastro por e-mail. Criou a conta, entrou no dashboard.</p>
     </div>
     <div class="plans">
       <div class="plan reveal"><h3>Gratuito</h3><div class="price">R$0</div><ul><li>Simulados iniciais</li><li>Dashboard de desempenho</li><li>XP, streaks e conquistas</li></ul><a class="btn btn-secondary" href="<?= url('login?tab=register') ?>">Criar conta</a></div>
-      <div class="plan featured reveal"><h3>Premium futuro</h3><div class="price">Em breve</div><ul><li>Mais questoes</li><li>Trilhas personalizadas</li><li>Relatorios avancados</li></ul><a class="btn btn-primary" href="<?= url('login?tab=register') ?>">Entrar agora</a></div>
+      <div class="plan featured reveal"><h3>Premium futuro</h3><div class="price">Em breve</div><ul><li>Mais questões</li><li>Trilhas personalizadas</li><li>Relatórios avançados</li></ul><a class="btn btn-primary" href="<?= url('login?tab=register') ?>">Entrar agora</a></div>
     </div>
   </section>
 
   <section class="cta">
     <div class="section-head center reveal">
-      <h2>Sua aprovacao<br>comeca <em>hoje.</em></h2>
-      <p>Crie sua conta gratis e faca o primeiro diagnostico.</p>
-      <div class="actions" style="margin-top:30px"><a class="btn btn-primary" href="<?= url('login?tab=register') ?>">Comecar gratis</a><a class="btn btn-secondary" href="<?= url('login') ?>">Ja tenho conta</a></div>
+      <h2>Sua aprovação<br>começa <em>hoje.</em></h2>
+      <p>Crie sua conta grátis e faça o primeiro diagnóstico.</p>
+      <div class="actions" style="margin-top:30px"><a class="btn btn-primary" href="<?= url('login?tab=register') ?>">Começar grátis</a><a class="btn btn-secondary" href="<?= url('login') ?>">Já tenho conta</a></div>
     </div>
   </section>
 </main>

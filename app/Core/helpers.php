@@ -112,7 +112,7 @@ function checkConquistas(int $userId): array
 
     $statement = $pdo->prepare('SELECT conquista_id FROM usuario_conquistas WHERE usuario_id = ?');
     $statement->execute([$userId]);
-    $desbloqueadas = array_column($statement->fetchAll(), 'conquista_id');
+    $desbloqueadas = array_map('intval', array_column($statement->fetchAll(), 'conquista_id'));
 
     $statement = $pdo->prepare('
         SELECT COUNT(*) as total, SUM(acertos) as soma_acertos, MAX(acertos / NULLIF(total, 0)) as best_pct
@@ -122,13 +122,55 @@ function checkConquistas(int $userId): array
     $statement->execute([$userId]);
     $simulados = $statement->fetch() ?: [];
 
+    $statement = $pdo->prepare('
+        SELECT MIN(tempo_gasto) as melhor_tempo
+        FROM simulados
+        WHERE usuario_id = ? AND finalizado_em IS NOT NULL AND tempo_gasto IS NOT NULL
+    ');
+    $statement->execute([$userId]);
+    $tempo = $statement->fetch() ?: [];
+
+    $statement = $pdo->prepare('
+        SELECT COUNT(DISTINCT q.materia_id) as materias
+        FROM respostas r
+        JOIN simulados s ON s.id = r.simulado_id
+        JOIN questoes q ON q.id = r.questao_id
+        WHERE s.usuario_id = ? AND s.finalizado_em IS NOT NULL
+    ');
+    $statement->execute([$userId]);
+    $exploracao = $statement->fetch() ?: [];
+
+    $statement = $pdo->prepare('
+        SELECT q.materia_id, COUNT(*) as total, SUM(r.correta) as acertos, COUNT(DISTINCT s.id) as simulados
+        FROM respostas r
+        JOIN simulados s ON s.id = r.simulado_id
+        JOIN questoes q ON q.id = r.questao_id
+        WHERE s.usuario_id = ? AND s.finalizado_em IS NOT NULL
+        GROUP BY q.materia_id
+    ');
+    $statement->execute([$userId]);
+    $desempenhoMateria = [];
+
+    foreach ($statement->fetchAll() as $linha) {
+        $total = max(1, (int) $linha['total']);
+        $desempenhoMateria[(int) $linha['materia_id']] = [
+            'total' => $total,
+            'simulados' => (int) $linha['simulados'],
+            'percentual' => (int) $linha['acertos'] / $total,
+        ];
+    }
+
     $rules = [
         ['chave' => 'primeiro_simulado', 'cond' => (int) ($simulados['total'] ?? 0) >= 1],
         ['chave' => 'streak_3', 'cond' => (int) ($user['streak'] ?? 0) >= 3],
         ['chave' => 'streak_7', 'cond' => (int) ($user['streak'] ?? 0) >= 7],
         ['chave' => 'acerto_perfeito', 'cond' => (float) ($simulados['best_pct'] ?? 0) >= 1.0],
         ['chave' => 'maratona', 'cond' => (int) ($simulados['total'] ?? 0) >= 10],
+        ['chave' => 'mestre_matematica', 'cond' => ($desempenhoMateria[1]['simulados'] ?? 0) >= 5 && ($desempenhoMateria[1]['percentual'] ?? 0) >= 0.9],
+        ['chave' => 'mestre_portugues', 'cond' => ($desempenhoMateria[2]['simulados'] ?? 0) >= 5 && ($desempenhoMateria[2]['percentual'] ?? 0) >= 0.9],
+        ['chave' => 'velocista', 'cond' => (int) ($tempo['melhor_tempo'] ?? PHP_INT_MAX) > 0 && (int) ($tempo['melhor_tempo'] ?? PHP_INT_MAX) < 300],
         ['chave' => 'dedicado', 'cond' => (int) ($user['xp'] ?? 0) >= 1000],
+        ['chave' => 'explorador', 'cond' => (int) ($exploracao['materias'] ?? 0) >= 5],
     ];
 
     $novas = [];
@@ -142,7 +184,7 @@ function checkConquistas(int $userId): array
         $statement->execute([$rule['chave']]);
         $conquista = $statement->fetch();
 
-        if (! $conquista || in_array($conquista['id'], $desbloqueadas, true)) {
+        if (! $conquista || in_array((int) $conquista['id'], $desbloqueadas, true)) {
             continue;
         }
 
@@ -151,6 +193,7 @@ function checkConquistas(int $userId): array
         $pdo->prepare('UPDATE usuarios SET xp = xp + ? WHERE id = ?')
             ->execute([(int) $conquista['xp_bonus'], $userId]);
 
+        $desbloqueadas[] = (int) $conquista['id'];
         $novas[] = $rule['chave'];
     }
 
@@ -185,7 +228,7 @@ function verifyCsrf(): void
 
     if (! hash_equals($_SESSION['csrf'] ?? '', $token)) {
         http_response_code(403);
-        echo 'Token invalido. <a href="javascript:history.back()">Voltar</a>';
+        echo 'Token inválido. <a href="javascript:history.back()">Voltar</a>';
         exit;
     }
 }

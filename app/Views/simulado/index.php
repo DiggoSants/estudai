@@ -30,7 +30,9 @@ p{color:var(--muted);line-height:1.7;overflow-wrap:anywhere}
 .materia small{color:var(--muted);display:block}
 .field{margin-bottom:18px}
 .field label{display:block;font-weight:800;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
-.field select,.field input{width:100%;min-height:48px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.04);color:var(--text);padding:14px;font:500 15px 'DM Sans'}
+.field select,.field input{width:100%;min-height:48px;border:1px solid var(--border);border-radius:12px;background:#0b1426;color:var(--text);padding:14px;font:500 15px 'DM Sans';outline:none}
+.field select:focus,.field input:focus{border-color:rgba(0,229,160,.45);box-shadow:0 0 0 4px rgba(0,229,160,.08)}
+.field option{background:#0b1426;color:var(--text)}
 .btn{display:inline-flex;justify-content:center;align-items:center;min-height:48px;border:0;border-radius:12px;background:var(--grad);color:#060b18;padding:15px 24px;font-weight:800;cursor:pointer;box-shadow:0 0 34px rgba(0,229,160,.22);text-align:center}
 .ghost{background:rgba(255,255,255,.04);color:var(--text);border:1px solid var(--border);box-shadow:none}
 .hint{background:linear-gradient(160deg,rgba(0,229,160,.08),rgba(0,184,255,.04));border:1px solid rgba(0,229,160,.16);border-radius:18px;padding:18px;margin-bottom:16px}
@@ -51,31 +53,31 @@ p{color:var(--muted);line-height:1.7;overflow-wrap:anywhere}
 
   <section class="panel">
     <h1>Novo simulado</h1>
-    <p class="sub">Monte um diagnostico rapido. Ao finalizar, o Estudai calcula XP, registra seu historico e atualiza a rota individual de estudos.</p>
+    <p class="sub">Monte um diagnóstico rápido. Ao finalizar, o Estudai calcula XP, registra seu histórico e atualiza a rota individual de estudos.</p>
 
     <?php if ($erro): ?><div class="error"><?= e($erro) ?></div><?php endif; ?>
     <?php if ($aviso): ?><div class="notice"><?= e($aviso) ?></div><?php endif; ?>
     <?php if ((int) $totalQuestoes === 0): ?>
-      <div class="error">Ainda nao existem questoes no banco. Rode <strong>composer run migrate</strong> para importar o seed inicial.</div>
+      <div class="error">Ainda não existem questões no banco. Rode <strong>composer run migrate</strong> para importar o seed inicial.</div>
     <?php endif; ?>
 
     <form action="<?= url('simulado/iniciar') ?>" method="POST" class="grid">
       <input type="hidden" name="csrf_token" value="<?= e(csrfToken()) ?>">
       <div>
-        <h2>Materias</h2>
-        <p>Selecione uma ou mais. Se nao escolher nenhuma, o simulado mistura tudo.</p>
+        <h2>Matérias</h2>
+        <p>Selecione uma ou mais. Se não escolher nenhuma, o simulado mistura tudo.</p>
         <div class="materias">
           <?php foreach ($materias as $materia): ?>
             <label class="materia">
               <input type="checkbox" name="materias[]" value="<?= (int) $materia['id'] ?>" <?= (int) $materia['total_questoes'] === 0 ? 'disabled' : '' ?>>
-              <span><strong><?= e($materia['icone']) ?> <?= e($materia['nome']) ?></strong><small><?= (int) $materia['total_questoes'] ?> questoes</small></span>
+              <span><strong><?= e($materia['icone']) ?> <?= e($materia['nome']) ?></strong><small><?= (int) $materia['total_questoes'] ?> questões</small></span>
             </label>
           <?php endforeach; ?>
         </div>
       </div>
       <aside>
-        <div class="hint"><strong>IA de rota</strong><p>Depois do simulado, a recomendacao diaria usa seus erros por materia para sugerir o proximo bloco de estudo.</p></div>
-        <div class="field"><label>Dificuldade</label><select name="dificuldade"><option value="todas" selected>Todas</option><option value="facil">Facil</option><option value="medio">Medio</option><option value="dificil">Dificil</option></select></div>
+        <div class="hint"><strong>IA de rota</strong><p>Depois do simulado, a recomendação diária usa seus erros por matéria para sugerir o próximo bloco de estudo.</p></div>
+        <div class="field"><label>Dificuldade</label><select name="dificuldade"><option value="todas" selected>Todas</option><option value="facil">Fácil</option><option value="medio">Médio</option><option value="dificil">Difícil</option></select></div>
         <div class="field"><label>Quantidade</label><input type="number" name="quantidade" min="3" max="20" value="10"></div>
         <button class="btn" type="submit" <?= (int) $totalQuestoes === 0 ? 'disabled' : '' ?>>Iniciar simulado</button>
       </aside>

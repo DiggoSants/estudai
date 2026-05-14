@@ -31,7 +31,7 @@ h1{font-size:clamp(36px,6vw,62px);line-height:1;margin-bottom:8px}
 </head>
 <body>
 <main class="wrap">
-  <div class="top"><a href="<?= url('simulado') ?>">Novo simulado</a><span class="muted">Simulado #<?= (int) $simulado['id'] ?> - <?= count($questoes) ?> questoes</span></div>
+  <div class="top"><a href="<?= url('simulado') ?>">Novo simulado</a><span class="muted">Simulado #<?= (int) $simulado['id'] ?> - <?= count($questoes) ?> questões</span></div>
   <h1>Responda com calma.</h1>
   <p class="muted">Ao finalizar, seu resultado alimenta a rota individual de estudos.</p>
   <?php if ($aviso): ?><div class="notice"><?= e($aviso) ?></div><?php endif; ?>

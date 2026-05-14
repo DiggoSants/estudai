@@ -36,7 +36,7 @@ final class DashboardController extends Controller
         ', [$uid]);
 
         $ultimos = $this->fetchAll($pdo, '
-            SELECT s.*, DATE_FORMAT(s.finalizado_em, "%d/%m as %H:%i") as data_fmt
+            SELECT s.*, DATE_FORMAT(s.finalizado_em, "%d/%m às %H:%i") as data_fmt
             FROM simulados s
             WHERE s.usuario_id = ? AND s.finalizado_em IS NOT NULL
             ORDER BY s.finalizado_em DESC
@@ -71,7 +71,7 @@ final class DashboardController extends Controller
             JOIN simulados s ON r.simulado_id = s.id
             JOIN questoes q ON r.questao_id = q.id
             JOIN materias m ON q.materia_id = m.id
-            WHERE s.usuario_id = ? AND r.correta = 0
+            WHERE s.usuario_id = ? AND r.correta = 0 AND s.finalizado_em IS NOT NULL
             GROUP BY q.id, q.enunciado, m.nome, m.cor, m.icone
             ORDER BY tentativas DESC
             LIMIT 3

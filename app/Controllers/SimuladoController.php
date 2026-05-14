@@ -40,7 +40,7 @@ final class SimuladoController extends Controller
         $questoes = (new Questao())->selecionar($materiaIds, $dificuldade, $quantidade);
 
         if ($questoes === []) {
-            flash('erro', 'Nao encontrei questoes com esses filtros. Tente uma dificuldade diferente ou selecione mais materias.');
+            flash('erro', 'Não encontrei questões com esses filtros. Tente uma dificuldade diferente ou selecione mais matérias.');
             $this->redirect('simulado');
         }
 
@@ -48,7 +48,7 @@ final class SimuladoController extends Controller
         $_SESSION['simulado_ativo'] = $simuladoId;
 
         if (count($questoes) < $quantidade) {
-            flash('aviso', 'O banco ainda nao tem questoes suficientes para completar a quantidade pedida. Gere mais questoes pelo seed para aumentar a variedade.');
+            flash('aviso', 'O banco ainda não tem questões suficientes para completar a quantidade pedida. Gere mais questões pelo seed para aumentar a variedade.');
         }
 
         $this->redirect("simulado/{$simuladoId}");
@@ -64,7 +64,7 @@ final class SimuladoController extends Controller
 
         if (! $simulado) {
             http_response_code(404);
-            echo 'Simulado nao encontrado.';
+            echo 'Simulado não encontrado.';
             return;
         }
 
@@ -73,7 +73,7 @@ final class SimuladoController extends Controller
         }
 
         if ((int) ($_SESSION['simulado_ativo'] ?? 0) !== $simuladoId) {
-            flash('erro', 'Esse simulado antigo nao esta mais ativo. Inicie um novo diagnostico.');
+            flash('erro', 'Esse simulado antigo não está mais ativo. Inicie um novo diagnóstico.');
             $this->redirect('simulado');
         }
 
@@ -91,7 +91,7 @@ final class SimuladoController extends Controller
 
         $simuladoId = (int) $id;
         if ((int) ($_SESSION['simulado_ativo'] ?? 0) !== $simuladoId) {
-            flash('erro', 'Esse simulado nao esta ativo. Inicie um novo diagnostico.');
+            flash('erro', 'Esse simulado não está ativo. Inicie um novo diagnóstico.');
             $this->redirect('simulado');
         }
 
@@ -114,7 +114,7 @@ final class SimuladoController extends Controller
         }
 
         if ((int) ($_SESSION['ultimo_resultado_simulado'] ?? 0) !== $simuladoId) {
-            flash('erro', 'Para revisar outro simulado, use o historico do dashboard quando essa tela estiver liberada. Por enquanto, gere um novo diagnostico.');
+            flash('erro', 'Para revisar outro simulado, use o histórico do dashboard quando essa tela estiver liberada. Por enquanto, gere um novo diagnóstico.');
             $this->redirect('simulado');
         }
 

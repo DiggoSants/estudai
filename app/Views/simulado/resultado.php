@@ -34,7 +34,7 @@ h1{font-size:clamp(40px,7vw,72px);line-height:1;margin-bottom:12px}
   <?php $total = max(1, (int) $simulado['total']); $pct = round((int) $simulado['acertos'] / $total * 100); ?>
   <section class="hero">
     <h1>Resultado: <?= $pct ?>%</h1>
-    <p class="muted">Seu desempenho ja foi registrado no dashboard e usado para atualizar a rota individual de estudos.</p>
+    <p class="muted">Seu desempenho já foi registrado no dashboard e usado para atualizar a rota individual de estudos.</p>
     <div class="stats">
       <div class="stat"><span class="value"><?= (int) $simulado['acertos'] ?>/<?= (int) $simulado['total'] ?></span><span class="muted">acertos</span></div>
       <div class="stat"><span class="value">+<?= (int) $simulado['xp_ganho'] ?></span><span class="muted">XP ganho</span></div>
