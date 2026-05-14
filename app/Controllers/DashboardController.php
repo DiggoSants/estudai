@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Models\StudyAdvisor;
 
 final class DashboardController extends Controller
 {
@@ -90,6 +91,7 @@ final class DashboardController extends Controller
         $this->view('dashboard/index', [
             'title' => 'Dashboard',
             'user' => $user,
+            'rotaEstudos' => (new StudyAdvisor())->gerar($uid),
             'nivel' => calcNivel((int) $user['xp']),
             'stats' => $stats ?: [],
             'ultimos' => $ultimos,

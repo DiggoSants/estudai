@@ -14,6 +14,10 @@ $router->post('/register', [AuthController::class, 'register']);
 $router->get('/dashboard', [DashboardController::class, 'index']);
 $router->get('/logout', [AuthController::class, 'logout']);
 $router->get('/simulado', [SimuladoController::class, 'index']);
+$router->post('/simulado/iniciar', [SimuladoController::class, 'iniciar']);
+$router->get('/simulado/{id}', [SimuladoController::class, 'show']);
+$router->post('/simulado/{id}/finalizar', [SimuladoController::class, 'finalizar']);
+$router->get('/simulado/{id}/resultado', [SimuladoController::class, 'resultado']);
 
 // Aliases temporarios para compatibilidade com os arquivos originais.
 $router->get('/login.php', [AuthController::class, 'showLogin']);
