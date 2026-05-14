@@ -4,5 +4,10 @@
   "type": "project",
   "require": {
     "php": "^8.2"
+  },
+  "scripts": {
+    "migrate": "php database/migrate.php",
+    "migrate:force": "php database/migrate.php --force",
+    "migrate:forced": "php database/migrate.php --forced"
   }
 }
