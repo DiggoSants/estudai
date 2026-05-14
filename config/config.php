@@ -21,8 +21,13 @@ function databaseConfig(): array
         $parts = parse_url($databaseUrl);
 
         if ($parts !== false) {
+            $host = $parts['host'] ?? 'localhost';
+            // Force TCP connection by using 127.0.0.1 instead of localhost
+            if ($host === 'localhost') {
+                $host = '127.0.0.1';
+            }
             return [
-                'host' => $parts['host'] ?? 'localhost',
+                'host' => $host,
                 'port' => (int) ($parts['port'] ?? 3306),
                 'user' => urldecode($parts['user'] ?? 'root'),
                 'pass' => urldecode($parts['pass'] ?? ''),
@@ -31,8 +36,13 @@ function databaseConfig(): array
         }
     }
 
+    $host = envValue('DB_HOST', envValue('MYSQLHOST', 'localhost'));
+    // Force TCP connection by using 127.0.0.1 instead of localhost
+    if ($host === 'localhost') {
+        $host = '127.0.0.1';
+    }
     return [
-        'host' => envValue('DB_HOST', envValue('MYSQLHOST', 'localhost')),
+        'host' => $host,
         'port' => (int) envValue('DB_PORT', envValue('MYSQLPORT', '3306')),
         'user' => envValue('DB_USER', envValue('MYSQLUSER', 'root')),
         'pass' => envValue('DB_PASS', envValue('MYSQLPASSWORD', '')),
